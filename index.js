@@ -37,17 +37,14 @@ function handleUserArgs( rawArgs ){
     'A tool for importing, normalizing, and cross-interpolating addresses',
     'from numerous data sets. Use:',
     '\n\tnode index.js [ --help |' +
-      ' --source SOURCE [ ... ] [ --log-file LOG_FILE ] ]\n',
+    ' --source SOURCE [ ... ] [ --log-file LOG_FILE ] ]\n',
     '--help: print this message and exit.',
     '--source SOURCE: import all files belonging to a supported dataset',
     '\tfrom the argument directory (eg `--tiger tiger_shapefiles/`).',
-    '\tCurrently supported flags are:\n',
-    '\t\t--openaddresses',
-    '\t\t--osm',
-    '\t\t--tiger\n',
+    '\tCurrently supported flags are: ' + datasetImport.datasetOrder.join(','),
     '--log-file LOG_FILE: The path of the file to write all logging',
     '\tstatements to. Defaults to "import.log".'
-  ].join( '\n' );
+  ].join('\n');
 
   if( rawArgs.length === 0 ){
     console.error( helpMessage );
