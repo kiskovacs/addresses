@@ -5,24 +5,26 @@
 
 'use strict';
 
-var logger = require( 'winston' );
-var minimist = require( 'minimist' );
-var datasetImport = require( './lib/dataset_import' );
+var logger = require("./lib/logger"),
+    minimist = require( 'minimist' ),
+    datasetImport = require( './lib/dataset_import' );
 
 /**
  * Configure the import script's logging framework.
  * @param {string|null} logFile The path of the file to write all logging
- *      statements to. If `null`, default to "import.log".
+ *      statements to. If `null`, default to console.
  */
 function configureLogging( logFile ){
-  logger.remove( logger.transports.Console );
-  var loggerOptions = {
-    filename: logFile || 'import.log',
-    timestamp: true,
-    colorize: true,
-    handleExceptions: true
-  };
-  logger.add( logger.transports.File, loggerOptions );
+  if(logFile) {
+    logger.remove(logger.transports.Console);
+    var loggerOptions = {
+      filename: logFile,
+      timestamp: true,
+      colorize: true,
+      handleExceptions: true
+    };
+    logger.add(logger.transports.File, loggerOptions);
+  }
   logger.info( 'Logger loaded.' );
 }
 
